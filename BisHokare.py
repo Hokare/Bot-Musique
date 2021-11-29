@@ -2,7 +2,10 @@ import discord
 from discord.ext import commands
 import youtube_dl
 import asyncio
+import dotenv
+import os
 
+dotenv.load_dotenv()
 bot = commands.Bot(command_prefix=["&", "$"], description = "Bot pour tout le monde!")
 musics = {}
 ytdl = youtube_dl.YoutubeDL()
@@ -78,4 +81,4 @@ async def play(ctx, url):
         play_song(client, musics[ctx.guild], video)
 
 
-bot.run("TOKEN")
+bot.run(os.getenv("TOKEN"))

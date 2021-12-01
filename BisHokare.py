@@ -80,5 +80,15 @@ async def play(ctx, url):
         await ctx.send(f"Je lance : {video.url}")
         play_song(client, musics[ctx.guild], video)
 
+@bot.command()
+async def help(message):
+	prefix = (await bot.get_prefix(message))[0]
+	embed = discord.Embed(
+		color=discord.Color.from_rgb(176, 86, 0), #rgb(135,206,250)
+		title="Commandes",
+		description=f"``{prefix}play (URL YT)`` : Lance la musique dans ton salon vocal \n ``{prefix}pause`` : met en pause la musique \n ``{prefix}resume`` : reprends la musique \n ``{prefix}skip`` : passe à la musique suivante"
+	)
+	await message.channel.send(embed=embed)
+
 
 bot.run(os.getenv("TOKEN"))

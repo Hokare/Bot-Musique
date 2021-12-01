@@ -87,7 +87,7 @@ async def help(message):
 	embed = discord.Embed(
 		color=discord.Color.from_rgb(176, 86, 0), #rgb(135,206,250)
 		title="Commandes",
-		description=f"``{prefix}play (URL YT)`` : Lance la musique dans ton salon vocal \n ``{prefix}pause`` : met en pause la musique \n ``{prefix}resume`` : reprends la musique \n ``{prefix}skip`` : passe à la musique suivante"
+		description=f"``{prefix}play (URL YT)`` : Lance la musique dans ton salon vocal \n ``{prefix}pause`` : Met en pause la musique \n ``{prefix}resume`` : Reprends la musique \n ``{prefix}skip`` : Passe à la musique suivante"
 	)
 	await message.channel.send(embed=embed)
 

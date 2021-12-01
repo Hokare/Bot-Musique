@@ -7,6 +7,7 @@ import os
 
 dotenv.load_dotenv()
 bot = commands.Bot(command_prefix=["&", "$"], description = "Bot pour tout le monde!")
+bot.remove_command("help")
 musics = {}
 ytdl = youtube_dl.YoutubeDL()
 

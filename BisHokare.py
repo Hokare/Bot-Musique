@@ -4,6 +4,7 @@ import youtube_dl
 import asyncio
 import dotenv
 import os
+from youtubesearchpython.__future__ import VideosSearch
 
 dotenv.load_dotenv()
 bot = commands.Bot(command_prefix=["&", "$"], description = "Bot pour tout le monde!")
@@ -66,20 +67,23 @@ def play_song(client, queue, song):
 
 
 @bot.command()
-async def play(ctx, url):
-    print("play")
-    client = ctx.guild.voice_client
+async def play(ctx, text):
+	print("play")
+	client = ctx.guild.voice_client
 
-    if client and client.channel:
-        video = Video(url)
-        musics[ctx.guild].append(video)
-    else:
-        channel = ctx.author.voice.channel
-        video = Video(url)
-        musics[ctx.guild] = []
-        client = await channel.connect()
-        await ctx.send(f"Je lance : {video.url}")
-        play_song(client, musics[ctx.guild], video)
+	search = VideosSearch(text, limit=1)
+	result = await search.next()
+
+	if client and client.channel:
+		video = Video(result['result'][0]['link'])
+		musics[ctx.guild].append(video)
+	else:
+		channel = ctx.author.voice.channel
+		video = Video(result['result'][0]['link'])
+		musics[ctx.guild] = []
+		client = await channel.connect()
+		await ctx.send(f"Je lance : {video.url}")
+		play_song(client, musics[ctx.guild], video)
 
 @bot.command()
 async def help(message):
